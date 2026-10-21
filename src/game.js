@@ -353,9 +353,11 @@ export function createGame(events) {
       S.nudge = [0, 0];
     }
 
+    // The set warms up when it's switched on: the picture opens out from a
+    // line. After a crash it stays off until you switch it back on.
+    if (S.mode === 'title' || S.mode === 'run') S.off = Math.max(0, S.off - dt * 1.6);
+
     if (S.mode === 'title' || S.mode === 'over') {
-      // The set warms up: the picture opens out from a line.
-      S.off = Math.max(0, S.off - dt * 1.6);
       const target = S.mode === 'title' ? 1.6 : 0.6;
       S.speed += (target - S.speed) * (1 - Math.exp(-dt * 2));
       S.s += S.speed * dt;
@@ -372,7 +374,7 @@ export function createGame(events) {
       moveJunk(dt);
       if (S.deathT > 1.25) {
         S.mode = 'over';
-        S.off = 0.999; S.fade = 0.5; S.fadeTo = 0.5;
+        S.off = 1;
         events.over(S.kind, meters());
       }
       return;
