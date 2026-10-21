@@ -36,7 +36,8 @@ npm run build    # static build in dist/
 ```
 
 The build is plain static files (relative paths), so any static host
-can serve `dist/` as it is.
+can serve `dist/` as it is. On Vercel, the Vite preset's defaults (`npm run build`,
+output `dist`) are all it needs.
 
 Needs WebGPU or WebGL 2 (any current browser). `?renderer=webgl` or
 `?renderer=webgpu` pins one, and `?particles=60000` sets how many dots the
